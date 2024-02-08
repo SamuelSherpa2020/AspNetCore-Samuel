@@ -27,6 +27,7 @@ namespace MyFirstApp
                 return Task.CompletedTask;
                 */
             });
+            app.Run();
 
 
         }
