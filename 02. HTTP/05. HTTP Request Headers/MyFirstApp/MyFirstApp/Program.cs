@@ -1,4 +1,6 @@
-﻿namespace MyFirstApp
+﻿using System.Runtime.CompilerServices;
+
+namespace MyFirstApp
 {
     public class Program
     {
@@ -11,16 +13,24 @@
             app.Run(async (HttpContext context) =>
             {
                 context.Response.Headers["content-type"] = "text/html";
-                var method = context.Request.Method;
 
-                if (method.Equals("GET"))
+                if (context.Request.Headers.ContainsKey("user-agent"))
                 {
-                    if (context.Request.Query.ContainsKey("id"))
-                    {
-                        var id = context.Request.Query["id"];
-                        await context.Response.WriteAsync($"<p>The id is: {id}</p>");
-                    }
+                    var userAgentValue = context.Request.Headers["user-agent"];
+                    await context.Response.WriteAsync($"<p>The value in key User-Agent is: {userAgentValue}</p>");
                 }
+
+                //below is my practice:
+                if ((context.Request.Headers.ContainsKey("accept")) && (context.Request.Headers.ContainsKey("accept-language")))
+                {
+                    var accept = context.Request.Headers["accept"];
+                    await context.Response.WriteAsync($"<p>The value in key Accept is: {accept}</p>");
+
+                    var acceptLanguage = context.Request.Headers["accept-language"];
+                    await context.Response.WriteAsync($"<p>The value in key Accept-Language is: {acceptLanguage}</p>");
+
+                }
+
             });
 
             app.Run();
