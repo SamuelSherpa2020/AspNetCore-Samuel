@@ -10,29 +10,16 @@
             var app = builder.Build();
             app.Run(async (HttpContext context) =>
             {
-                string path = context.Request.Path;
-                string method = context.Request.Method;
-
                 context.Response.Headers["content-type"] = "text/html";
-                await context.Response.WriteAsync($"<p>The path is: {path}</p>");
-                await context.Response.WriteAsync($"<p>The method is: {method}</p>");
-
-                if (path.Equals("/helloSamuel"))
-                {
-                    await context.Response.WriteAsync($"<p>The path equals to {path}</p>");
-                }
-                else
-                {
-                    await context.Response.WriteAsync($"<p>The path IS NOT EQUAL to {path}</p>");
-                }
+                var method = context.Request.Method;
 
                 if (method.Equals("GET"))
                 {
-                    await context.Response.WriteAsync($"<p>The method equals to {method}</p>");
-                }
-                else
-                {
-                    await context.Response.WriteAsync($"<p>The method IS NOT EQUAL to {method}</p>");
+                    if (context.Request.Query.ContainsKey("id"))
+                    {
+                        var id = context.Request.Query["id"];
+                        await context.Response.WriteAsync($"<p>The id is: {id}</p>");
+                    }
                 }
             });
 
