@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Microsoft.Extensions.Primitives;
+using System.Runtime.CompilerServices;
 
 namespace MyFirstApp
 {
@@ -7,17 +8,29 @@ namespace MyFirstApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-
+            
             var app = builder.Build();
+
             app.Run(async (HttpContext context) =>
             {
-                context.Response.Headers["content-type"] = "text/html";
+                StreamReader reader = new StreamReader(context.Request.Body);
+                var bodyReader = await reader.ReadToEndAsync();
 
-                if (context.Request.Headers.ContainsKey("AuthorizationKey"))
+                Dictionary<string, StringValues> dictBodyReader = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(bodyReader);
+                if (dictBodyReader.ContainsKey("God"))
                 {
-                    var authorizationKey = context.Request.Headers["AuthorizationKey"];
-                    await context.Response.WriteAsync($"<p>The value in AuthorizationKey is: {authorizationKey}</p>");
+                    var firstGod = dictBodyReader["God"][0];
+                    await context.Response.WriteAsync(firstGod);
+                }
+
+                //Below is practice:
+
+                if (dictBodyReader.ContainsKey("God"))
+                {
+                    foreach (var item in dictBodyReader["God"])
+                    {
+                       await context.Response.WriteAsync(item);
+                    }
                 }
 
             });
