@@ -1,4 +1,4 @@
-namespace MyFirstApp
+﻿namespace MyFirstApp
 {
     public class Program
     {
@@ -10,18 +10,30 @@ namespace MyFirstApp
             var app = builder.Build();
             app.Run(async (HttpContext context) =>
             {
-                context.Response.Headers["Content-Type"] = "text/html";
-                context.Response.Headers["Content-Length"] = "100";
+                string path = context.Request.Path;
+                string method = context.Request.Method;
 
-                context.Response.StatusCode = 200;
-                await context.Response.WriteAsync("<h1>Hello</h1>");
-                await context.Response.WriteAsync("<p>World !</p>");
+                context.Response.Headers["content-type"] = "text/html";
+                await context.Response.WriteAsync($"<p>The path is: {path}</p>");
+                await context.Response.WriteAsync($"<p>The method is: {method}</p>");
 
+                if (path.Equals("/helloSamuel"))
+                {
+                    await context.Response.WriteAsync($"<p>The path equals to {path}</p>");
+                }
+                else
+                {
+                    await context.Response.WriteAsync($"<p>The path IS NOT EQUAL to {path}</p>");
+                }
 
-                /*instead of using async, we can also write the following code to remove async and await which also work fine.
-                return Task.CompletedTask;
-                if you are not using above return then you have to have app.Rune(); below:
-                */
+                if (method.Equals("GET"))
+                {
+                    await context.Response.WriteAsync($"<p>The method equals to {method}</p>");
+                }
+                else
+                {
+                    await context.Response.WriteAsync($"<p>The method IS NOT EQUAL to {method}</p>");
+                }
             });
 
             app.Run();
