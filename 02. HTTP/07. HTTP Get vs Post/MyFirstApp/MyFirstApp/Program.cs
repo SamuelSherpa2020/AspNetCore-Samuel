@@ -17,11 +17,11 @@ namespace MyFirstApp
                 var bodyReader = await reader.ReadToEndAsync();
 
                 Dictionary<string, StringValues> dictBodyReader = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(bodyReader);
-                if (dictBodyReader.ContainsKey("God"))
-                {
-                    var firstGod = dictBodyReader["God"][0];
-                    await context.Response.WriteAsync(firstGod);
-                }
+                //if (dictBodyReader.ContainsKey("God"))
+                //{
+                //    var firstGod = dictBodyReader["God"][0];
+                //    await context.Response.WriteAsync(firstGod);
+                //}
 
                 //Below is practice:
 
@@ -30,6 +30,7 @@ namespace MyFirstApp
                     foreach (var item in dictBodyReader["God"])
                     {
                        await context.Response.WriteAsync(item);
+                       await context.Response.WriteAsync("सब ठिकठाक");
                     }
                 }
 
