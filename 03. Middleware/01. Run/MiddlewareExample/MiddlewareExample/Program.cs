@@ -7,6 +7,7 @@ namespace MiddlewareExample
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.Build();
 
+
             app.Run(async(HttpContext context) =>
             {
                 await context.Response.WriteAsync("Hello");
@@ -17,7 +18,9 @@ namespace MiddlewareExample
                 await context.Response.WriteAsync("Hello");
             });
 
-            app.Run();
+            app.Run(); // I don't know why but the program won't run if app.Run() is not mentioned.
+
+            //app.UseEndpoints();
         }
     }
 }
