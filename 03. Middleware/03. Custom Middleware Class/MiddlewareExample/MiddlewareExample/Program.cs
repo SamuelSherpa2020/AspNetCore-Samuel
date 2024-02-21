@@ -21,8 +21,9 @@ namespace MiddlewareExample
                 await context.Response.WriteAsync("1st Middleware Ends\n");
 
             });
+
             //Middleware Chain 2
-            app.UseMyCustomMidleware();
+            app.UseMiddleware<MyCustomMiddleware>();    
 
             //Terminating Middleware
 
