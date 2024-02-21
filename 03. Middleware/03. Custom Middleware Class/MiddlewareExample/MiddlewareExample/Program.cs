@@ -21,14 +21,10 @@ namespace MiddlewareExample
                 await context.Response.WriteAsync("1st Middleware Ends\n");
 
             });
-
-            app.UseMiddleware<MyCustomMiddleware>();
-
             //Middleware Chain 2
-            app.Use(async (HttpContext context, RequestDelegate next) => {
-                await context.Response.WriteAsync("3rd Middleware\n");
-                await next(context);
-            });
+            app.UseMyCustomMidleware();
+
+            //Terminating Middleware
 
             app.Run(async (HttpContext context) => {
                 await context.Response.WriteAsync("Terminating Middleware\n");
