@@ -1,4 +1,4 @@
-using MiddlewareExample.CustomMiddleware;
+using MiddlewareExample.CustomMiddlewareFolder;
 
 namespace MiddlewareExample
 {
@@ -16,18 +16,16 @@ namespace MiddlewareExample
 
             //Middleware Chain 1
             app.Use(async(HttpContext context,RequestDelegate next)=>{
-                await context.Response.WriteAsync("1st Middleware starts\n");
+                await context.Response.WriteAsync("1st Middleware\n");
                 await next(context);
-                await context.Response.WriteAsync("1st Middleware Ends\n");
 
             });
             //Middleware Chain 2
-            app.UseMyCustomMidleware();
+            app.UseSamuelConventionalMiddleware();
 
             //Terminating Middleware
-
             app.Run(async (HttpContext context) => {
-                await context.Response.WriteAsync("Terminating Middleware\n");
+                await context.Response.WriteAsync("3rd Middleware : The Terminating Middleware\n");
             });
 
             app.Run();
