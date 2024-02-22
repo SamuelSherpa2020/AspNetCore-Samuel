@@ -22,6 +22,7 @@ namespace MiddlewareExample
 
             });
             //Middleware Chain 2
+            app.UseMiddleware<MyCustomMiddleware>();
             app.UseMyCustomMidleware();
 
             //Terminating Middleware

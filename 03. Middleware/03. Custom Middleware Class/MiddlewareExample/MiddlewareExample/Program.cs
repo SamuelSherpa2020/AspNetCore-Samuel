@@ -1,4 +1,6 @@
-using MiddlewareExample.CustomMiddleware;
+
+
+using MiddlewareExample.CustomMiddlewareFolder;
 
 namespace MiddlewareExample
 {
@@ -9,7 +11,8 @@ namespace MiddlewareExample
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddTransient<MyCustomMiddleware>();
-
+            builder.Services.AddTransient<SamuelMiddleware>();
+            
             var app = builder.Build();
 
            
@@ -23,8 +26,11 @@ namespace MiddlewareExample
             });
 
             //Middleware Chain 2
-            app.UseMiddleware<MyCustomMiddleware>();    
+            app.UseMiddleware<MyCustomMiddleware>();
 
+            //creating custom middleware without the help of Video
+            app.UseSamuelMiddleWare();
+            //app.UseMiddleware<SamuelMiddleware>();
             //Terminating Middleware
 
             app.Run(async (HttpContext context) => {

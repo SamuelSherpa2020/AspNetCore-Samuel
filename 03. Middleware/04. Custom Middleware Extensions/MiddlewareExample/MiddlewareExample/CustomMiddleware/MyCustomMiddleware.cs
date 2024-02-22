@@ -14,9 +14,9 @@ namespace MiddlewareExample.CustomMiddleware
 
     public static class CustomMiddlewareExention
     {
-        public static IApplicationBuilder UseMyCustomMidleware(this IApplicationBuilder samuel)
+        public static IApplicationBuilder UseMyCustomMidleware(this IApplicationBuilder app)
         {
-            return samuel.UseMiddleware<MyCustomMiddleware>();
+            return app.UseMiddleware<MyCustomMiddleware>();
         }
     }
 }
