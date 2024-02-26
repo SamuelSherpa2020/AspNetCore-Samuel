@@ -11,41 +11,20 @@ namespace RoutingExample
             app.UseRouting();
 
 
-            app.Use(async (context, next) =>
-            {
-                await context.Response.WriteAsync("Use of First GetEndpoint()\n");
-                Microsoft.AspNetCore.Http.Endpoint? endPoint = context.GetEndpoint();
-                if (endPoint != null)
-                {
-                    await context.Response.WriteAsync($"First Endpoint name: {endPoint.DisplayName}\n\n");
-                }
-                await next(context);
-            });
-
-
-            app.Use(async (context, next) =>
-            {
-                await context.Response.WriteAsync("Use of Second GetEndpoint()\n");
-                Microsoft.AspNetCore.Http.Endpoint? endPoint = context.GetEndpoint();
-                if (endPoint != null)
-                {
-                    await context.Response.WriteAsync($"Second Endpoint name: {endPoint.DisplayName}\n\n");
-                }
-
-                await next(context);
-            });
-
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("Map1", async (context) =>
+                endpoints.Map("files/{fileName}.{extension}", async (context) =>
                 {
-                    await context.Response.WriteAsync("URL Map1 been called");
+                    string? fileName = Convert.ToString(context.Request.RouteValues["fileName"]);
+                    string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
+
+                    await context.Response.WriteAsync($"The file name is: {fileName} - {extension}");
                 });
 
-                endpoints.MapPost("Map2", async (context) =>
+                endpoints.Map("employee/profile/{employeeName}", async (context) =>
                 {
-                    await context.Response.WriteAsync("URL Map2 been found");
+                    string? employeeName = Convert.ToString(context.Request.RouteValues["employeeName"]);
+                    await context.Response.WriteAsync($"Employee Name is: {employeeName}");
                 });
             });
 
