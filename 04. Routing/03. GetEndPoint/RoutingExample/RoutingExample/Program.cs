@@ -10,6 +10,18 @@ namespace RoutingExample
             //enable routing
             app.UseRouting();
 
+            // Just learning to use Use.When()
+            //app.UseWhen(
+            //    context => context.Request.Query.ContainsKey("Map1"),
+            //    app =>
+            //    {
+            //        app.Use((context, next) =>
+            //        {
+            //            next(context);
+            //            return context.Response.WriteAsync("Hello");
+            //        });
+            //    }
+            //    );
 
             app.Use(async (context, next) =>
             {
@@ -29,7 +41,7 @@ namespace RoutingExample
                 Microsoft.AspNetCore.Http.Endpoint? endPoint = context.GetEndpoint();
                 if (endPoint != null)
                 {
-                    await context.Response.WriteAsync($"Second Endpoint name: {endPoint.DisplayName}");
+                    await context.Response.WriteAsync($"Second Endpoint name: {endPoint.DisplayName}\n\n");
                 }
 
                 await next(context);
