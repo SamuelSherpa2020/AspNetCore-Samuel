@@ -22,7 +22,9 @@ namespace MiddlewareExample
 
             });
             //Middleware Chain 2
-            app.UseMiddleware<MyCustomMiddleware>();
+            //app.UseMiddleware<MyCustomMiddleware>();
+
+
             app.UseMyCustomMidleware();
 
             //Terminating Middleware
@@ -30,6 +32,7 @@ namespace MiddlewareExample
             app.Run(async (HttpContext context) => {
                 await context.Response.WriteAsync("Terminating Middleware\n");
             });
+
 
             app.Run();
         }
