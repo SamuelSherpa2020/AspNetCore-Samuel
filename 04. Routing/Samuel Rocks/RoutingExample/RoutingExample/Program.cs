@@ -2,11 +2,11 @@ namespace RoutingExample
 {
     public class Program
     {
+        private static string? churchName;
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.Build();
-
 
             //enable routing
             app.UseRouting();
@@ -32,14 +32,18 @@ namespace RoutingExample
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/Map1", async (context) =>
+                endpoints.MapGet("ChurchName/{CornerStone}", async (context) =>
                 {
-                    await context.Response.WriteAsync($"Endpoint: {context.Request.Path} has been called.");
+                    churchName = Convert.ToString(context.Request.RouteValues["cornerstone"]);
+                    await context.Response.WriteAsync($"The name of the church is: {churchName}");
                 });
 
-                endpoints.MapPost("/Map2", async (context) =>
+                endpoints.MapPost("ShepherdNames/{pastorName}&{eldername}", async (context) =>
                 {
-                    await context.Response.WriteAsync($"Endpoint: {context.Request.Path} has been called.");
+                    var pastorName = Convert.ToString(context.Request.RouteValues["pastorname"]);
+                    var elderName = Convert.ToString(context.Request.RouteValues["eldername"]);
+                    
+                    await context.Response.WriteAsync($"The shepherdnames of : {churchName} church are {pastorName}, {elderName} has been called.");
                 });
             });
 
@@ -47,7 +51,7 @@ namespace RoutingExample
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("I am terminating middleware");
+                await context.Response.WriteAsync($"We are in the path: {context.Request.Path}");
             });
 
             app.Run();
