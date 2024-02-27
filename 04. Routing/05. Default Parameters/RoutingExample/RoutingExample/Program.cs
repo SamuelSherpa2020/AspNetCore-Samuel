@@ -13,15 +13,15 @@ namespace RoutingExample
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.Map("files/{fileName}.{extension}", async (context) =>
+                endpoints.Map("files/{fileName=aspnetcoreSamuel}&{extension=dot}", async (context) =>
                 {
                     string? fileName = Convert.ToString(context.Request.RouteValues["fileName"]);
                     string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
 
-                    await context.Response.WriteAsync($"The file name is: {fileName} - {extension}");
+                    await context.Response.WriteAsync($"The file name is: {fileName}.{extension}");
                 });
 
-                endpoints.Map("employee/profile/{employeeName}", async (context) =>
+                endpoints.Map("employee/profile/{employeeName=Samuel}", async (context) =>
                 {
                     string? employeeName = Convert.ToString(context.Request.RouteValues["employeeName"]);
                     await context.Response.WriteAsync($"Employee Name is: {employeeName}");
