@@ -21,13 +21,13 @@ namespace RoutingExample
                     await context.Response.WriteAsync($"The file name is: {fileName}.{extension}");
                 });
 
-                endpoints.Map("employee/profile/{employeeName=Samuel}", async (context) =>
+                endpoints.Map("employee/profile/{employeeName:length(4,7)=samuel}", async (context) =>
                 {
                     string? employeeName = Convert.ToString(context.Request.RouteValues["employeeName"]);
                     await context.Response.WriteAsync($"Employee Name is: {employeeName}");
                 });
 
-                endpoints.Map("products/detail/{id:int}", async (context) =>
+                endpoints.Map("products/detail/{id:int=777}", async (context) =>
                 {
                     if (context.Request.RouteValues.ContainsKey("id"))
                     {
@@ -46,7 +46,7 @@ namespace RoutingExample
 
                 endpoints.Map("daily-digest/{reportdate:datetime}", async (context) =>
                 {
-                    if (context.Request.RouteValues.ContainsKey("daily-digest"))
+                    if (context.Request.RouteValues.ContainsKey("reportdate"))
                     {
                         DateTime reportDate = Convert.ToDateTime(context.Request.RouteValues["reportdate"]);
                         await context.Response.WriteAsync($"The date of the reportdate is: {reportDate.ToShortDateString()}");
@@ -69,6 +69,15 @@ namespace RoutingExample
                         await context.Response.WriteAsync("Suman is not called");
                     }
                 });
+
+
+                //for the part 2 of routing constraint
+
+               endpoints.Map("cities/{cityid:guid}", async (context) =>
+               {
+                   Guid cityId = Guid.Parse(Convert.ToString(context.Request.RouteValues["cityid"])!);
+                   await context.Response.WriteAsync($"The cityid is: {cityId}");
+               });
             });
 
 
