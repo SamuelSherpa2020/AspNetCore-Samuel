@@ -27,7 +27,7 @@ namespace RoutingExample
                     await context.Response.WriteAsync($"Employee Name is: {employeeName}");
                 });
 
-                endpoints.Map("products/detail/{id?}", async (context) =>
+                endpoints.Map("products/detail/{id:int}", async (context) =>
                 {
                     if (context.Request.RouteValues.ContainsKey("id"))
                     {
@@ -44,6 +44,12 @@ namespace RoutingExample
                     }
                 });
 
+                endpoints.Map("daily-digest/{reportdate:datetime}", async (context) =>
+                {
+
+                    DateTime reportDate = Convert.ToDateTime(context.Request.RouteValues["reportdate"]);
+                    await context.Response.WriteAsync($"The date of the reportdate is: {reportDate.ToShortDateString()}");
+                });
             });
 
             app.Run(async context =>
