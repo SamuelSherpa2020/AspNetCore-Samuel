@@ -46,11 +46,31 @@ namespace RoutingExample
 
                 endpoints.Map("daily-digest/{reportdate:datetime}", async (context) =>
                 {
+                    if (context.Request.RouteValues.ContainsKey("daily-digest"))
+                    {
+                        DateTime reportDate = Convert.ToDateTime(context.Request.RouteValues["reportdate"]);
+                        await context.Response.WriteAsync($"The date of the reportdate is: {reportDate.ToShortDateString()}");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("The daily digest doesn't have any date");
+                    }
+                });
 
-                    DateTime reportDate = Convert.ToDateTime(context.Request.RouteValues["reportdate"]);
-                    await context.Response.WriteAsync($"The date of the reportdate is: {reportDate.ToShortDateString()}");
+                endpoints.Map("friends/name/{suman:int}", async (context) =>
+                {
+                    if (context.Request.RouteValues.ContainsKey("suman"))
+                    {
+                        string? friendName = Convert.ToString(context.Request.RouteValues["suman"]);
+                        await context.Response.WriteAsync($"Your friend {friendName} has been called");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("Suman is not called");
+                    }
                 });
             });
+
 
             app.Run(async context =>
             {
