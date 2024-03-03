@@ -1,3 +1,4 @@
+using RoutingExample.CustomConstraint;
 using System.Runtime.InteropServices;
 
 namespace RoutingExample
@@ -7,6 +8,12 @@ namespace RoutingExample
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddRouting(options =>
+            {
+                options.ConstraintMap.Add("months", typeof(MonthsCustomConstraint));
+            });
+
             var app = builder.Build();
 
             //enable routing
@@ -36,7 +43,7 @@ namespace RoutingExample
                     }
                 });
 
-                endpoints.Map("products/detail/{id:int}", async (context) =>
+                endpoints.Map("products/detail/{id:int=777}", async (context) =>
                 {
                     if (context.Request.RouteValues.ContainsKey("id"))
                     {
@@ -45,7 +52,6 @@ namespace RoutingExample
 
                         //int queryValue = Convert.ToInt32(context.Request.Query["1"]);
                         //await context.Response.WriteAsync($"The employeeid using query is value {queryValue}\n");
-
                     }
                     else
                     {
@@ -95,18 +101,23 @@ namespace RoutingExample
                     }
                 });
 
-                endpoints.Map("stats-report/{year:int:range(1990,1990)}/{month:regex(^(Jan|Feb|March)$)}", async (context) =>
+                endpoints.Map("stats-report/{year:int:range(1990,2000)}/{month:months}", async (context) =>
                 {
                     int year = Convert.ToInt32(context.Request.RouteValues["year"]);
                     string? month = Convert.ToString(context.Request.RouteValues["month"]);
 
-                    if (month == "Jan" || month == "Feb" || month == "March")
+                    if (month == "jan" || month == "feb" || month == "march" || month == "april")
                     {
-                        await context.Response.WriteAsync($"Year: {year} and month {month}");
+                        await context.Response.WriteAsync($"Year: {year} and month {month}\n");
                     }
                     else
                     {
-                        await context.Response.WriteAsync($"Month {month} didn't match so no stats-report");
+                        await context.Response.WriteAsync($"Month {month} didn't match so no stats-report\n");
+                    }
+
+                    if (context.Request.RouteValues.ContainsKey("year") && context.Request.RouteValues.ContainsKey("month"))
+                    {
+                        await context.Response.WriteAsync($"Both Year and month is present in the url\n");
                     }
                 });
             });
