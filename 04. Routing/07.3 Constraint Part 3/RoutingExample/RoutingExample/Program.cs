@@ -23,10 +23,17 @@ namespace RoutingExample
                     await context.Response.WriteAsync($"The file name is: {fileName}.{extension}");
                 });
 
-                endpoints.Map("employee/profile/{employeeName:length(4,7)=samuel}", async (context) =>
+                endpoints.Map("employee/profile/{employeeName:length(4,7):alpha=samuel}", async (context) =>
                 {
-                    string? employeeName = Convert.ToString(context.Request.RouteValues["employeeName"]);
-                    await context.Response.WriteAsync($"Employee Name is: {employeeName}");
+                    if (context.Request.RouteValues.ContainsKey("employeename"))
+                    {
+                        string? employeeName = Convert.ToString(context.Request.RouteValues["employeeName"]);
+                        await context.Response.WriteAsync($"Employee Name is: {employeeName}");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("The employee name is not given so no default value is written.");
+                    }
                 });
 
                 endpoints.Map("products/detail/{id:int}", async (context) =>
@@ -75,20 +82,29 @@ namespace RoutingExample
 
                 //for the part 2 of routing constraint
 
-               endpoints.Map("cities/{cityid:guid}", async (context) =>
-               {
-                   if (context.Request.RouteValues.ContainsKey("cityid"))
-                   {
-                   Guid cityId = Guid.Parse(Convert.ToString(context.Request.RouteValues["cityid"])!);
-                   await context.Response.WriteAsync($"The cityid is: {cityId}");
-                   }
-                   else
-                   {
-                       await context.Response.WriteAsync("The city is not given guid id");
-                   }
-               });
+                endpoints.Map("cities/{cityid:guid}", async (context) =>
+                {
+                    if (context.Request.RouteValues.ContainsKey("cityid"))
+                    {
+                        Guid cityId = Guid.Parse(Convert.ToString(context.Request.RouteValues["cityid"])!);
+                        await context.Response.WriteAsync($"The cityid is: {cityId}");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("The city is not given guid id");
+                    }
+                });
+
+                endpoints.Map("stats-report/{year:int:range(1990,1990)}/{month:regex(^(Jan|Feb|March)$)}", async (context) =>
+                {
+                    int year = Convert.ToInt32(context.Request.RouteValues["year"]);
+                    string? month = Convert.ToString(context.Request.RouteValues["month"]);
+
+                    await context.Response.WriteAsync($"Year: {year} and month {month}");
+                });
             });
 
+            
 
             app.Run(async context =>
             {
