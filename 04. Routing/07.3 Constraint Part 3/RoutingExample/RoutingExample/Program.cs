@@ -100,11 +100,18 @@ namespace RoutingExample
                     int year = Convert.ToInt32(context.Request.RouteValues["year"]);
                     string? month = Convert.ToString(context.Request.RouteValues["month"]);
 
-                    await context.Response.WriteAsync($"Year: {year} and month {month}");
+                    if (month == "Jan" || month == "Feb" || month == "March")
+                    {
+                        await context.Response.WriteAsync($"Year: {year} and month {month}");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync($"Month {month} didn't match so no stats-report");
+                    }
                 });
             });
 
-            
+
 
             app.Run(async context =>
             {
