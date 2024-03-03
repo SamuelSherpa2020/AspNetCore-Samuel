@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace RoutingExample
 {
     public class Program
@@ -27,7 +29,7 @@ namespace RoutingExample
                     await context.Response.WriteAsync($"Employee Name is: {employeeName}");
                 });
 
-                endpoints.Map("products/detail/{id:int=777}", async (context) =>
+                endpoints.Map("products/detail/{id:int}", async (context) =>
                 {
                     if (context.Request.RouteValues.ContainsKey("id"))
                     {
@@ -75,8 +77,15 @@ namespace RoutingExample
 
                endpoints.Map("cities/{cityid:guid}", async (context) =>
                {
+                   if (context.Request.RouteValues.ContainsKey("cityid"))
+                   {
                    Guid cityId = Guid.Parse(Convert.ToString(context.Request.RouteValues["cityid"])!);
                    await context.Response.WriteAsync($"The cityid is: {cityId}");
+                   }
+                   else
+                   {
+                       await context.Response.WriteAsync("The city is not given guid id");
+                   }
                });
             });
 
