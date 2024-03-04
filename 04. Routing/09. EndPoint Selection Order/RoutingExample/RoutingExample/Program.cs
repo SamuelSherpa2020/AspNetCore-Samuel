@@ -101,7 +101,7 @@ namespace RoutingExample
                     }
                 });
 
-                endpoints.Map("stats-report/{year:int:range(1990,2000)}/{month:months}", async (context) =>
+                endpoints.Map("stats-report/{year:int:range(1990,2030)}/{month:months}", async (context) =>
                 {
                     int year = Convert.ToInt32(context.Request.RouteValues["year"]);
                     string? month = Convert.ToString(context.Request.RouteValues["month"]);
@@ -119,6 +119,13 @@ namespace RoutingExample
                     {
                         await context.Response.WriteAsync($"Both Year and month is present in the url\n");
                     }
+                });
+
+
+                //stats-report for 1990 Jan
+                endpoints.Map("stats-report/2024/jan", async (context) =>
+                {
+                    await context.Response.WriteAsync("The sales report of 2024 Jan");
                 });
             });
 
