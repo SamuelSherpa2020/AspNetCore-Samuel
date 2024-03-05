@@ -1,21 +1,45 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
 using System.ComponentModel.Design.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseEndpoints(endpoints =>
+public class Program
 {
-    endpoints.Map("/", async (context) =>
+    public static void Main(string[] args)
     {
-        await context.Response.WriteAsync("Hello");
-    });
-});
-//app.MapGet("/", () => "Hello World!");
 
-app.Run();
+        //var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
+        {
+            WebRootPath = "myroot"
+        });
+
+        var app = builder.Build();
+
+        app.UseStaticFiles(); //works the web root path (myroot)
+
+        app.UseStaticFiles(new StaticFileOptions{
+            FileProvider = new PhysicalFileProvider(
+              builder.Environment.EnvironmentName + "\\mywebroot")
+        });
+
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.Map("/", async (context) =>
+            {
+                await context.Response.WriteAsync("Hello");
+            });
+        });
+        //app.MapGet("/", () => "Hello World!");
+        app.Run(async context =>
+        {
+            await context.Response.WriteAsync("I am terminating middleware");
+        });
+        app.Run();
+
+    }
+}
