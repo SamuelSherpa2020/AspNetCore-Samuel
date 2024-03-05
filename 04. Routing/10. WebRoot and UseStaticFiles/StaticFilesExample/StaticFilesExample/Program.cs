@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using System.ComponentModel.Design.Serialization;
+using System.IO;
 
 
 public class Program
@@ -20,10 +21,12 @@ public class Program
 
         app.UseStaticFiles(); //works the web root path (myroot)
 
-        app.UseStaticFiles(new StaticFileOptions{
+        app.UseStaticFiles(new StaticFileOptions()
+        {
             FileProvider = new PhysicalFileProvider(
-              builder.Environment.EnvironmentName + "\\mywebroot")
+              Path.Combine(builder.Environment.ContentRootPath, "mywebroot"))
         });
+
 
         app.UseRouting();
 

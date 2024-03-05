@@ -7,14 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="myroot\hello-world.webp" />
-    <Content Include="myroot\myimage.jfif" />
-    <Content Include="myroot\sample.txt" />
+    <None Remove="myroot\myrootSub\sub.jfif" />
+    <None Remove="myroot\myrootSub\sub.txt" />
+    <None Remove="myroot\myrootSub\sub.webp" />
+    <None Remove="mywebroot\myimage.jfif" />
+    <None Remove="mywebroot\ramailo.webp" />
+    <None Remove="mywebroot\samuel.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="myroot\" />
-    <Folder Include="mywebroot\" />
+    <Content Include="myroot\hello-world.webp" />
+    <Content Include="myroot\myimage.jfif" />
+    <Content Include="myroot\myrootSub\sub.jfif" />
+    <Content Include="myroot\myrootSub\sub.webp" />
+    <Content Include="myroot\myrootSub\sub.txt" />
+    <Content Include="myroot\sample.txt" />
+    <Content Include="mywebroot\ramailo.webp" />
+    <Content Include="mywebroot\myimage.jfif" />
+    <Content Include="mywebroot\samuel.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
