@@ -127,6 +127,11 @@ namespace RoutingExample
                 {
                     await context.Response.WriteAsync("The sales report of 2024 Jan");
                 });
+
+                endpoints.Map("Country/{name?}", async (context) =>
+                {
+                    await context.Response.WriteAsync("Use of optional parameter");
+                });
             });
 
 
