@@ -120,6 +120,20 @@ namespace RoutingExample
                         await context.Response.WriteAsync($"Both Year and month is present in the url\n");
                     }
                 });
+
+                endpoints.Map("countries/{id:range(1,100)}", async (context) =>
+                {
+                    if (context.Request.RouteValues.ContainsKey("id"))
+                    {
+                        string? idValue = Convert.ToString(context.Request.RouteValues["id"]);
+                        await context.Response.WriteAsync($"{idValue}");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("The countryId should be 1 and 100");
+
+                    }
+                });
             });
 
 
