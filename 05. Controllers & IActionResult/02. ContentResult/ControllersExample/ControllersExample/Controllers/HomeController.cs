@@ -8,9 +8,9 @@ namespace ControllersExample.Controllers
         //public HomeController() { }
         [Route("Home/Index")]
         [Route("/")]
-        public string Index()
+        public ContentResult Index()
         {
-            return ("Hello from Index");
+            return Content("<h1>Hello there</h1></br><h2>I am calling you from Index</h2>","text/html");
         }
 
         [Route("Home/try")]
@@ -33,6 +33,15 @@ namespace ControllersExample.Controllers
             //var phoneNumber = HttpContext.Request.RouteValues["mobile"];
 
              return("The given phone number is haha");
+        }
+        [Route("TryContentResult")]
+        public ContentResult TryContentResult()
+        {
+            return new ContentResult()
+            {
+                Content = "<h1>Hello there, I am from TryContentResult</h1>",
+                ContentType = "text/html"
+            };
         }
     }
 }
