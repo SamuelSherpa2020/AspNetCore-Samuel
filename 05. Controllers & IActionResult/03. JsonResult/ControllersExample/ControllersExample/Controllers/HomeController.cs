@@ -37,11 +37,21 @@ namespace ControllersExample.Controllers
         [Route("TryContentResult")]
         public ContentResult TryContentResult()
         {
-            return new ContentResult()
+            ContentResult obj = new ContentResult()
             {
-                Content = "<h1>Hello there, I am from TryContentResult</h1>",
+                Content = "wow",
                 ContentType = "text/html"
             };
+            //obj.Content = "hello";
+            //obj.ContentType= "text/html";
+
+            return obj;
+            //return new ContentResult()
+            //{
+            //    Content = "<h1>Hello there, I am from TryContentResult</h1>",
+            //    ContentType = "text/html"
+            //};
+            
         }
     }
 }
