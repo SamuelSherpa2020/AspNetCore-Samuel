@@ -10,11 +10,11 @@ namespace ControllersExample
             builder.Services.AddControllers(); // also can be written as: builder.Services.AddTransient<HomeController
             //builder.Services
             var app = builder.Build();
-            app.Use((HttpContext context, RequestDelegate next) =>
-            {
-                return next(context);
-            });
-            app.UseRouting();
+            //app.Use((HttpContext context, RequestDelegate next) =>
+            //{
+            //    return next(context);
+            //});
+            //app.UseRouting();
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.Map("/", async context =>
