@@ -71,20 +71,23 @@ namespace ControllersExample.Controllers
         [Route("file-download1")]
         public VirtualFileResult FileDownload1()
         {
-            return new VirtualFileResult("/simplefile1.pdf","application/pdf");
+            //return new VirtualFileResult("/simplefile1.pdf","application/pdf");
+            return  File("/simplefile1.pdf", "application/pdf");
+
         }
 
         [Route("file-download2")]
         public PhysicalFileResult FileDownload2()
         {
-            return new PhysicalFileResult(@"C:\Users\asus\Downloads\simplefile2.pdf", "application/pdf");
+            //return new PhysicalFileResult(@"C:\Users\asus\Downloads\simplefile2.pdf", "application/pdf");
+            return  PhysicalFile(@"C:\Users\asus\Downloads\simplefile2.pdf", "application/pdf");
         }
 
         [Route("file-download3")]
         public FileContentResult FileDownload3()
         {
             byte[] byteFile = System.IO.File.ReadAllBytes("C:\\Users\\asus\\Downloads\\simplefile3.pdf");
-            return new FileContentResult(byteFile, "application/pdf");
+            return  File(byteFile, "application/pdf");
         }
     }
 }
