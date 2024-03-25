@@ -89,5 +89,12 @@ namespace ControllersExample.Controllers
             byte[] byteFile = System.IO.File.ReadAllBytes("C:\\Users\\asus\\Downloads\\simplefile3.pdf");
             return  File(byteFile, "application/pdf");
         }
+
+
+        public IActionResult Calculator()
+        {
+            byte[] byteFile = System.IO.File.ReadAllBytes("C:\\Users\\asus\\Downloads\\simplefile3.pdf");
+            return  File(byteFile, "application/pdf");
+        }
     }
 }
