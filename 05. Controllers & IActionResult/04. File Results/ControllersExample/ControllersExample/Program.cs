@@ -27,6 +27,7 @@ namespace ControllersExample
             //    //    await context.Response.WriteAsync("Hello from about us");
             //    //});
             //});
+            app.UseStaticFiles();
             app.MapControllers();
             //app.MapControllers();
             //app.MapGet("/", () => "Hello World!");
