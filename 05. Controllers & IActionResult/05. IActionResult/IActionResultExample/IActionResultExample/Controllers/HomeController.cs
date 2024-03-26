@@ -10,7 +10,28 @@ namespace IActionResultExample.Controllers
         {
             bool bookKey = Convert.ToBoolean(Request.Query.ContainsKey("bookid"));
             var bookId = Convert.ToInt32(Request.Query["bookid"]);
-            bool sLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
+            bool isLoggedIn;
+            try
+            {
+               isLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
+            }
+            catch (FormatException ex)
+            {
+                Response.StatusCode = 400;
+                return Content("The value provided for 'isLoggedIn' is not a valid boolean.");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Response.StatusCode = 400;
+                return Content("The 'isLoggedin' query is missing.");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                //return Content($"{ex.Message}");
+                return Content("Invalid Authentication is made.");
+            }
+
 
             if (!bookKey)
             {
@@ -32,12 +53,12 @@ namespace IActionResultExample.Controllers
                 Response.StatusCode = 400;
                 return Content("The bookid cannot be greater then 1000.");
             }
-            if (!sLoggedIn)
+            if (!isLoggedIn)
             {
                 Response.StatusCode = 401;
                 return Content("The authentication is required.");
             }
-            return File("/simplefile1.pdf","application/pdf");
+            return File("/simplefile1.pdf", "application/pdf");
         }
     }
 }
