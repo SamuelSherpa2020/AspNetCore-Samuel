@@ -6,13 +6,16 @@ namespace IActionResultExample.Controllers
     public class HomeController : Controller
     {
 
-        [Route("book")]
+        [Route("bookstore")]
         public IActionResult Index()
         {
             bool bookKey = Convert.ToBoolean(Request.Query.ContainsKey("bookid"));
             var bookId = Convert.ToInt32(Request.Query["bookid"]);
 
             bool isLoggedIn;
+
+            #region Error Handling in isLoggedIn 
+
             try
             {
                 isLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
@@ -34,7 +37,7 @@ namespace IActionResultExample.Controllers
                 //return Unauthorized("Invalid Authentication is made.");
                 return Unauthorized($"{ex.Message}");
             }
-
+            #endregion
 
             if (!bookKey)
             {
@@ -56,7 +59,9 @@ namespace IActionResultExample.Controllers
             {
                 return Unauthorized("Use must be logged in");
             }
-            return File("/simplefile1.pdf", "application/pdf");
+            //return File("/simplefile1.pdf", "application/pdf");
+
+            return new RedirectToActionResult("Books", "Store", new { },permanent:true); // permanently telling browser to remember that the url has been changed permanently.
         }
     }
 }
