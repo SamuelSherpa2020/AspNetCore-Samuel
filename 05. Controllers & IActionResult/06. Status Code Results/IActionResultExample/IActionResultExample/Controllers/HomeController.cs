@@ -26,12 +26,10 @@ namespace IActionResultExample.Controllers
             }
             catch (ArgumentNullException ex)
             {
-                Response.StatusCode = 400;
-                return Content("The 'isLoggedin' query is missing.");
+                return BadRequest("isLoggedin cannot be null");
             }
             catch (UnauthorizedAccessException ex)
             {
-                Response.StatusCode = 500;
                 //return Content($"{ex.Message}");
                 //return Unauthorized("Invalid Authentication is made.");
                 return Unauthorized($"{ex.Message}");
@@ -40,28 +38,23 @@ namespace IActionResultExample.Controllers
 
             if (!bookKey)
             {
-                Response.StatusCode = 400;
-                return Content("The bookid is not supplied");
+                return BadRequest("The bookid is not supplied");
             }
             if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
             {
-                Response.StatusCode = 400;
-                return Content("The bookid cannot be null or empty.");
+                return BadRequest("The bookid cannot be null or empty.");
             }
             if (bookId <= 0)
             {
-                Response.StatusCode = 400;
-                return Content("The bookid cannot be less then or equal to zero.");
+                return BadRequest();
             }
             if (bookId > 1000)
             {
-                Response.StatusCode = 400;
-                return Content("The bookid cannot be greater then 1000.");
+                return NotFound("There's no available book on that id.");
             }
             if (!isLoggedIn)
             {
-                Response.StatusCode = 401;
-                return Content("The authentication is required.");
+                return Unauthorized("Use must be logged in");
             }
             return File("/simplefile1.pdf", "application/pdf");
         }
