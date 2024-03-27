@@ -29,11 +29,12 @@ namespace IActionResultExample.Controllers
                 Response.StatusCode = 400;
                 return Content("The 'isLoggedin' query is missing.");
             }
-            catch (Exception ex)
+            catch (UnauthorizedAccessException ex)
             {
                 Response.StatusCode = 500;
                 //return Content($"{ex.Message}");
-                return Content("Invalid Authentication is made.");
+                //return Unauthorized("Invalid Authentication is made.");
+                return Unauthorized($"{ex.Message}");
             }
 
 
