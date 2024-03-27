@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace IActionResultExample.Controllers
 {
@@ -10,15 +11,18 @@ namespace IActionResultExample.Controllers
         {
             bool bookKey = Convert.ToBoolean(Request.Query.ContainsKey("bookid"));
             var bookId = Convert.ToInt32(Request.Query["bookid"]);
+
             bool isLoggedIn;
             try
             {
-               isLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
+                isLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
             }
             catch (FormatException ex)
             {
                 Response.StatusCode = 400;
-                return Content("The value provided for 'isLoggedIn' is not a valid boolean.");
+                //return Content("The value provided for 'isLoggedIn' is not a valid boolean.");
+                return Content($"{ex.Message}");
+                //throw new FormatException($"{ex.Message}");
             }
             catch (ArgumentNullException ex)
             {
