@@ -5,10 +5,11 @@ namespace IActionResultExample.Controllers
     public class StoreController : Controller
     {
 
-        [Route("store/books")]
+        [Route("store/books/{id}")]
         public IActionResult Books()
         {
-            return Content("<h1>This is a books store</h1>", "text/html");
+            var id = Convert.ToInt32(Request.RouteValues["id"]);
+            return Content($"<h1>The id of the book is: {id}</h1>", "text/html");
         }
     }
 }

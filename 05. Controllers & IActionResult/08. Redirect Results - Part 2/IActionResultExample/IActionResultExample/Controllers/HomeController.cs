@@ -61,7 +61,11 @@ namespace IActionResultExample.Controllers
             }
             //return File("/simplefile1.pdf", "application/pdf");
 
-            return new RedirectToActionResult("Books", "Store", new { },permanent:true); // permanently telling browser to remember that the url has been changed permanently.
+            //return new RedirectToActionResult("Books", "Store", new { },permanent:true); // permanently telling browser to remember that the url has been changed permanently.
+
+            //return RedirectToActionPermanent("Books","Store", new { Id=bookId});
+
+            return Redirect($"store/books/{bookId}");
         }
     }
 }
