@@ -1,6 +1,6 @@
 ﻿namespace Assignment10.Models
 {
-    public class Property
+    public class BankAccountDetail
     {
         public int? accountNumber { get; set; }
         public string? accountHolderName { get; set; }

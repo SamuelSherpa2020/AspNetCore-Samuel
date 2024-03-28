@@ -8,7 +8,7 @@ namespace Assignment10.Controllers
 
         [Route("/")]
         [HttpGet]
-        public IActionResult Index()
+        public ContentResult Index()
         {
             Response.StatusCode = 200;
             return Content("Welcome to the Best Bank", "text/plain");
@@ -18,7 +18,7 @@ namespace Assignment10.Controllers
         public JsonResult AccountDetails()
         {
             Response.StatusCode = 200;
-            Property property = new Property()
+            BankAccountDetail property = new BankAccountDetail()
             {
                 accountNumber = 1001,
                 accountHolderName = "Example Name",
@@ -34,27 +34,52 @@ namespace Assignment10.Controllers
             return File("AccountStatementPDF.pdf", "application/pdf");
         }
 
-        [Route("get-current-balance/{accountNumber}")]
+        [Route("get-current-balance/{accountNumber:int?}")]
         public IActionResult GetCurrentBalance()
         {
-            int balance = Convert.ToInt32(HttpContext.Request.RouteValues["accountNumber"]);
-            //return Content($"{balance}", "text/plain");//for task 4
-            if (balance.Equals(1001))
+            
+            object? accountNumberObj;
+            if ((HttpContext.Request.RouteValues.TryGetValue("accountNumber", out accountNumberObj)) && (accountNumberObj is string accountNumber))
             {
-                return Content($"{balance}", "text/plain");
+                if (string.IsNullOrEmpty(accountNumber))
+                {
+                    return BadRequest("Account number cannot be empty");
+                }
+                if (int.TryParse(accountNumber, out int accountNumberInt32))
+                {
+                    BankAccountDetail newbankAccountDetail = new()
+                    {
+                        accountNumber = 1001,
+                        accountHolderName = "Example Name",
+                        currentBalance = 5000
+                    };
+                    if (accountNumberInt32.Equals(1001))
+                    {
+                        return Content(newbankAccountDetail.currentBalance.ToString());
+                    }
+                    else
+                    {
+                        return BadRequest("account number must be 1001");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Account number is not in the correct format");
+                }
             }
             else
             {
-                return BadRequest("Account number sould be 1001");
-
+                return BadRequest("Account Number is not supplied.");
             }
         }
 
-        [Route("get-current-balance")]
-        public IActionResult GetCurrentBalanceAccount()
-        {
-            return Content("Account Number sould be supplied","text/plain");
-        }
+
+
+        //[Route("get-current-balance")]
+        //public IActionResult GetCurrentBalanceAccount()
+        //{
+        //    return Content("Account Number sould be supplied", "text/plain");
+        //}
 
     }
 }
