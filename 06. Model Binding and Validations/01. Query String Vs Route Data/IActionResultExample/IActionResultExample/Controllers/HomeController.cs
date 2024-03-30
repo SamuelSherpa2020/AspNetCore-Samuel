@@ -6,13 +6,9 @@ namespace IActionResultExample.Controllers
     public class HomeController : Controller
     {
 
-        [Route("bookstore")]
-        public IActionResult Index()
+        [Route("bookstore/{bookId?}/{isLoggedIn?}")]
+        public IActionResult Index(int?bookId,bool?isLoggedIn)
         {
-            bool bookKey = Convert.ToBoolean(Request.Query.ContainsKey("bookid"));
-            var bookId = Convert.ToInt32(Request.Query["bookid"]);
-
-            bool isLoggedIn;
 
             #region Error Handling in isLoggedIn 
 
@@ -39,7 +35,7 @@ namespace IActionResultExample.Controllers
             }
             #endregion
 
-            if (!bookKey)
+            if (bookId.HasValue.Equals(false))
             {
                 return BadRequest("The bookid is not supplied");
             }
@@ -55,7 +51,7 @@ namespace IActionResultExample.Controllers
             {
                 return NotFound("There's no available book on that id.");
             }
-            if (!isLoggedIn)
+            if (isLoggedIn.HasValue.Equals(false))
             {
                 return Unauthorized("Use must be logged in");
             }
