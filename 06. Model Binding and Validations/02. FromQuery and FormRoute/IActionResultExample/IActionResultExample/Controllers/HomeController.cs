@@ -7,7 +7,7 @@ namespace IActionResultExample.Controllers
     {
 
         [Route("bookstore/{bookId?}/{isLoggedIn?}")]
-        public IActionResult Index(int?bookId,bool?isLoggedIn)
+        public IActionResult Index([FromRoute]int?bookId,[FromQuery]bool?isLoggedIn)
         {
 
             #region Error Handling in isLoggedIn 
