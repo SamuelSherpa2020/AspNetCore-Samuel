@@ -8,43 +8,14 @@ namespace IActionResultExample.Controllers
     {
 
         [Route("bookstore/{bookId?}/{isLoggedIn?}")]
-        public IActionResult Index([FromRoute]int?bookId,[FromQuery]bool?isLoggedIn,Book book)
+        public IActionResult Index(int?bookId,bool?isLoggedIn,Book book)
         {
-
-            #region Error Handling in isLoggedIn 
-
-            try
-            {
-                isLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
-            }
-            catch (FormatException ex)
-            {
-                Response.StatusCode = 400;
-                //return Content("The value provided for 'isLoggedIn' is not a valid boolean.");
-                return Content($"{ex.Message}");
-                //throw new FormatException($"{ex.Message}");
-            }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest("isLoggedin cannot be null");
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                //return Content($"{ex.Message}");
-                //return Unauthorized("Invalid Authentication is made.");
-                return Unauthorized($"{ex.Message}");
-            }
-            #endregion
 
 
             #region Validation Of Request Data
             if (bookId.HasValue.Equals(false))
             {
                 return BadRequest("The bookid is not supplied");
-            }
-            if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
-            {
-                return BadRequest("The bookid cannot be null or empty.");
             }
             if (bookId <= 0)
             {
@@ -54,9 +25,9 @@ namespace IActionResultExample.Controllers
             {
                 return NotFound("There's no available book on that id.");
             }
-            if (isLoggedIn.HasValue.Equals(false))
+            if (isLoggedIn.Equals(false))
             {
-                return Unauthorized("Use must be logged in");
+                return Unauthorized("User must be logged in");
             }
             #endregion
             //return File("/simplefile1.pdf", "application/pdf");
