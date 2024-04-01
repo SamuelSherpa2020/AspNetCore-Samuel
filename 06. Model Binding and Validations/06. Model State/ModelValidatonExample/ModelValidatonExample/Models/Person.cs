@@ -5,7 +5,7 @@ namespace ModelValidatonExample.Models
 {
     public class Person
     {
-        [Required]
+        [Required(ErrorMessage ="Person cannot be null 😅")]
         public string? PersonName { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
