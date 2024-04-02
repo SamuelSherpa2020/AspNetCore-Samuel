@@ -10,20 +10,20 @@ namespace ModelValidatonExample.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //List<string> errorMessages = new List<string>();
-                //foreach (var item in ModelState.Values)
-                //{
-                //    if(item.Errors.Count > 0)
-                //    {
+                List<string> errorMessages = new List<string>();
+                foreach (var item in ModelState.Values)
+                {
+                    if (item.Errors.Count > 0)
+                    {
 
-                //    }
-                //    foreach (var error in item.Errors)
-                //    {
-                //        errorMessages.Add(error.ErrorMessage);
-                //    }
-                //}
+                    }
+                    foreach (var error in item.Errors)
+                    {
+                        errorMessages.Add(error.ErrorMessage);
+                    }
+                }
                 //Below is linq with which we made the above code short
-                //if(ModelState.Values.Errors.Count > 0)
+                //if (ModelState.Values.Errors.Count > 0)
                 //{
 
                 //}
