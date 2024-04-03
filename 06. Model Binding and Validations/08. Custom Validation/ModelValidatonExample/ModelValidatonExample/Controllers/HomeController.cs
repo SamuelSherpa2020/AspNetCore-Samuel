@@ -22,11 +22,6 @@ namespace ModelValidatonExample.Controllers
                         errorMessages.Add(error.ErrorMessage);
                     }
                 }
-                //Below is linq with which we made the above code short
-                //if (ModelState.Values.Errors.Count > 0)
-                //{
-
-                //}
                 string errorList = string.Join("\n", ModelState.Values
                     .SelectMany(errors => errors.Errors)
                     .Select(errorMessage => errorMessage.ErrorMessage).ToList());
