@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
+using System.Xml.Serialization;
 
 namespace ModelValidatonExample.CustomValidators
 {
@@ -39,5 +40,6 @@ namespace ModelValidatonExample.CustomValidators
                 return null; 
             }
         }
+
     }
 }

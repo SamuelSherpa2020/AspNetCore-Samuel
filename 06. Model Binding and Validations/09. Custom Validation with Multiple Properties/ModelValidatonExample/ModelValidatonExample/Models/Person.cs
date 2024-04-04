@@ -36,6 +36,15 @@ namespace ModelValidatonExample.Models
 
         [MinimumYearValidator(2022)]
         public DateTime DateOfBirth { get; set; }
+
+
+
+        public DateTime? FromDate { get; set; }
+        public DateTime? TryDate { get; set; }
+
+        [DateRangeValidator("FromDate","TryDate", ErrorMessage = "'From Date' and 'Try Date' must be greaten  to 'To date'")]
+        public DateTime? ToDate { get; set; }
+
         public override string ToString()
         {
             return $"Person object - PersonName:{PersonName} Email: {Email} Phone: {Phone} Password: {Password} ConfirmePassword: {ConfirmedPassword} Price: {Price}  Year Of Birth: {DateOfBirth}";
