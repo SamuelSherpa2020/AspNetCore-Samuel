@@ -1,26 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.JSInterop.Implementation;
 using ModelValidatonExample.Models;
 
 namespace ModelValidatonExample.Controllers
 {
+    [Controller]
     public class HomeController : Controller
     {
         [Route("register")]
         public IActionResult Index(Person person)
         {
+
             if (!ModelState.IsValid)
             {
                 List<string> errorMessages = new List<string>();
-                foreach (var item in ModelState.Values)
+                foreach (var item in ModelState)
                 {
-                    if (item.Errors.Count > 0)
-                    {
+                    //if (item.Errors.Count > 0)
+                    //{
 
-                    }
-                    foreach (var error in item.Errors)
-                    {
-                        errorMessages.Add(error.ErrorMessage);
-                    }
+                    //}
+                    //foreach (var error in item.Errors)
+                    //{
+                    //    errorMessages.Add(error.ErrorMessage);
+                    //}
                 }
                 string errorList = string.Join("\n", ModelState.Values
                     .SelectMany(errors => errors.Errors)
@@ -34,7 +37,8 @@ namespace ModelValidatonExample.Controllers
 
                 return BadRequest(errorList);
             }
-            return Content($"{person}");
+            //return Content($"{person}");
+            return new ContentResult();
         }
     }
 }

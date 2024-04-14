@@ -26,11 +26,11 @@ namespace ModelValidatonExample.CustomValidators
                 DateTime date = (DateTime)value;
                 if (date.Year >= _minimumYear)
                 {
-                    return new ValidationResult(string.Format(ErrorMessage ?? _defaultErrorMessage,_minimumYear));
+                    return ValidationResult.Success;
                 }
                 else
                 {
-                    return ValidationResult.Success;
+                    return new ValidationResult(string.Format(ErrorMessage ?? _defaultErrorMessage,_minimumYear));
                 }
             }
             else
@@ -40,6 +40,5 @@ namespace ModelValidatonExample.CustomValidators
                 return null; 
             }
         }
-
     }
 }

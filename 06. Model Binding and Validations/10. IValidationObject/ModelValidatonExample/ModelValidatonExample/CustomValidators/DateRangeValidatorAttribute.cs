@@ -32,9 +32,9 @@ namespace ModelValidatonExample.CustomValidators
                 {
                     DateTime _fromDateValue = Convert.ToDateTime(_fromDateProperty!.GetValue(validationContext.ObjectInstance));
                     DateTime _tryDateValue = Convert.ToDateTime(_tryDateProperty!.GetValue(validationContext.ObjectInstance)); 
-                    if (_tryDateValue > _toDate)
+                    if (_fromDateValue > _toDate)
                     {
-                        return new ValidationResult(ErrorMessage, new string[] { _fromDate,_tryDate, validationContext.MemberName! });
+                        return new ValidationResult(ErrorMessage, new string[] { _fromDate,_tryDate });
                     }
                     else
                     {
