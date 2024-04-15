@@ -37,8 +37,27 @@ namespace ModelValidatonExample.Controllers
 
                 return BadRequest(errorList);
             }
-            //return Content($"{person}");
-            return new ContentResult();
+            return Content($"{person}");
+            //return new ContentResult();
+        }
+
+        [Route("school")]
+        public IActionResult School(SchoolVM schoolVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                List<string> errorList = new List<string>();
+                string errorName = string.Join("\n", ModelState.Values.
+                    SelectMany(errors => errors.Errors).
+                    Select(errorMessage => errorMessage.ErrorMessage).
+                    ToList());
+
+                return BadRequest(errorName);
+            }
+            else
+            {
+                return Content($"{schoolVM}");
+            }
         }
     }
 }

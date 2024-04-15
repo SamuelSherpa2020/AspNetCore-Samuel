@@ -45,7 +45,7 @@ namespace ModelValidatonExample.Models
         [Required]
         public DateTime? ToDate { get; set; }
 
-        [Required]
+        //[Required]
         public int? Age { get; set; }
         public override string ToString()
         {
