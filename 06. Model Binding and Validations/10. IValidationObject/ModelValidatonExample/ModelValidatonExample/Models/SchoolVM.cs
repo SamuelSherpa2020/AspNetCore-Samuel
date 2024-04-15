@@ -18,13 +18,20 @@ namespace ModelValidatonExample.Models
 
         [EmailAddress]
         public string? Email { get; set; }
-        public string? Objectives { get; set; }
+
+        [Required]
+        public string[]? Objectives { get; set; }
 
 
+        //public override string ToString()
+        //{
+        //    return ($"School Name: {SchoolName}, Address: {Address}, PhoneNo1: {PhoneNo1}, PhoneNo2: {PhoneNo2}, Email: {Email}, Objectives :  {Objectives !=null ? string.Join(", ",Objectives): "None"}");
+        //}
         public override string ToString()
         {
-            return ($"School Name: {SchoolName}, Address: {Address}, PhoneNo1: {PhoneNo1}, PhoneNo2: {PhoneNo2}, Email: {Email}, Objectives : {Objectives}");
+            return $"School Name: {SchoolName}, Address: {Address}, PhoneNo1: {PhoneNo1}, PhoneNo2: {PhoneNo2}, Email: {Email}, Objectives: {(Objectives != null ? string.Join("\n ", Objectives) : "None")}";
         }
+
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
