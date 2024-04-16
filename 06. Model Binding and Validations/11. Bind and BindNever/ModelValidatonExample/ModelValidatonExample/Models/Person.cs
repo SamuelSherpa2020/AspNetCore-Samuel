@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ModelValidatonExample.CustomValidators;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -46,6 +47,7 @@ namespace ModelValidatonExample.Models
         public DateTime? ToDate { get; set; }
 
         //[Required]
+        [BindNever]
         public int? Age { get; set; }
         public override string ToString()
         {
