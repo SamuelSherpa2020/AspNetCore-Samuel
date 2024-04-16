@@ -8,8 +8,7 @@ namespace ModelValidatonExample.Controllers
     public class HomeController : Controller
     {
         [Route("register")]
-        public IActionResult Index([Bind(nameof(Person.PersonName),nameof(Person.Email), nameof(Person.Phone), nameof(Person.Password), nameof(Person.ConfirmedPassword), 
-            nameof(Person.Price))]Person person)
+        public IActionResult Index([FromBody]Person person)
         {
 
             if (!ModelState.IsValid)
