@@ -33,7 +33,7 @@ namespace ModelValidatonExample.Models
 
         [Required(ErrorMessage = "Price is required")]
         [Range(0, 999.99, ErrorMessage = "{0} must be between {1} and {2}")]
-        public string? Price { get; set; }
+        public Double? Price { get; set; }
 
 
         [MinimumYearValidator(1990,ErrorMessage ="too old, must be born , after 2000")]

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop.Implementation;
+using ModelValidatonExample.CustomModelBinder;
 using ModelValidatonExample.Models;
+using System.Reflection;
 using System.Xml;
 namespace ModelValidatonExample.Controllers
 {
@@ -8,7 +10,7 @@ namespace ModelValidatonExample.Controllers
     public class HomeController : Controller
     {
         [Route("register")]
-        public IActionResult Index([FromBody]Person person)
+        public IActionResult Index([FromBody] [ModelBinder(BinderType = typeof(PersonModelBinder))]Person person)
         {
 
             if (!ModelState.IsValid)

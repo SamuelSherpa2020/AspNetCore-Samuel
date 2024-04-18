@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop.Implementation;
+using ModelValidatonExample.DTOs;
 using ModelValidatonExample.Models;
 
 namespace ModelValidatonExample.Controllers
@@ -42,7 +43,8 @@ namespace ModelValidatonExample.Controllers
         }
 
         [Route("school")]
-        public IActionResult School(SchoolVM schoolVM)
+        [HttpPost]
+        public IActionResult School([FromBody]SchoolDTO schoolDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -56,7 +58,7 @@ namespace ModelValidatonExample.Controllers
             }
             else
             {
-                return Content($"{schoolVM}");
+                return Content($"{schoolDTO}");
             }
         }
     }
