@@ -12,8 +12,7 @@ namespace ModelValidatonExample.CustomModelBinder
             {
                 return new BinderTypeModelBinder(typeof(PersonModelBinder));
             }
-            //throw new NotImplementedException();
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

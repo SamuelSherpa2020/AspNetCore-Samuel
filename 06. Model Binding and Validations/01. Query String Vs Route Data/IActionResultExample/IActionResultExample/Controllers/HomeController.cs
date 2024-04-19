@@ -15,6 +15,7 @@ namespace IActionResultExample.Controllers
             try
             {
                 isLoggedIn = Convert.ToBoolean(Request.Query["isLoggedIn"]);
+                //isLoggedIn = Convert.ToBoolean(Request.ContainsKey);
             }
             catch (FormatException ex)
             {
