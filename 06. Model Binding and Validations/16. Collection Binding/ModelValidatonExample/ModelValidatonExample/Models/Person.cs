@@ -12,7 +12,7 @@ namespace ModelValidatonExample.Models
         [Required(ErrorMessage = "{0} cannot be empty")]
         [Display(Name = "person name")]
         [StringLength(40, MinimumLength = 3, ErrorMessage = "Name length should be between {2} and {1}")]
-        [RegularExpression("^[A-Za-z .]+$", ErrorMessage = "{0} can only have space and . No other characters are accepted.")]
+        [RegularExpression("^[A-Za-z .]*$", ErrorMessage = "{0} can only have space and . No other characters are accepted.")]
         public string? PersonName { get; set; }
 
         [EmailAddress(ErrorMessage = "Valid email is required !")]
@@ -49,6 +49,10 @@ namespace ModelValidatonExample.Models
         //[Required]
         [BindNever]
         public int? Age { get; set; }
+
+
+        public List<string?> Tags { get; set; } = new List<string?>();
+
         public override string ToString()
         {
             return $"Person object - PersonName:{PersonName} Email: {Email} Phone: {Phone} Password: {Password} ConfirmePassword: {ConfirmedPassword} Price: {Price}  Year Of Birth: {DateOfBirth}";
