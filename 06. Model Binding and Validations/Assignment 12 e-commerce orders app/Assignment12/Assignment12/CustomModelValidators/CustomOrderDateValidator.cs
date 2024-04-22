@@ -24,7 +24,7 @@ namespace Assignment12.CustomModelValidators
                 }
                 else
                 {
-                    return new ValidationResult(string.Format(ErrorMessage ?? _defaultErrorMessage, _minimumOrderDate.ToString("yyyy-mm-dd")), new string[] { nameof(validationContext.MemberName) });
+                    return new ValidationResult(string.Format(ErrorMessage ?? _defaultErrorMessage, _minimumOrderDate.ToString("yyyy-MM-dd")), new string[] { nameof(validationContext.MemberName) });
                 }
             }
             else
