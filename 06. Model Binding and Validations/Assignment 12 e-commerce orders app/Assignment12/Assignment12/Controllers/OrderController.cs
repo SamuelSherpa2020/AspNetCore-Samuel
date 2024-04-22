@@ -7,7 +7,7 @@ namespace Assignment12.Controllers
     {
         [HttpPost]
         [Route("/order")]
-        public IActionResult Index(Order order)
+        public IActionResult Index([Bind(nameof(Order.OrderDate),nameof(Order.InvoicePrice),nameof(Order.Products))]Order order) // making sure OrderNo is not binded
         {
             if (!ModelState.IsValid)
             {
