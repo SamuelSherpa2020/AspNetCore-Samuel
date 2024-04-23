@@ -1,0 +1,31 @@
+﻿@using ViewExample.Models
+
+@{
+    string titleName = "AspNet Core C# blocks and Expressions";
+    Person person = new Person()
+            {
+                Name = "Samuel",
+                DOB = Convert.ToDateTime("2000-07-02")
+            };
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@titleName</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <h2>Welcome</h2>
+    <p>Halo! @person.Name</p>
+    @{
+        double age = Math.Round((DateTime.Now - person.DOB).TotalDays / 365.25);
+
+    }
+    <p>
+        You are @age years old.
+
+    </p>
+</body>
+</html>
