@@ -2,13 +2,11 @@
 
 @{
     string titleName = "AspNet Core C# blocks and Expressions";
-    Person person = new Person()
-            {
-                Name = "Samuel",
-                // DOB = Convert.ToDateTime("2000-07-02")
-                DOB = null,
-                PersonGender = Gender.Male
-            };
+    List<Person> people = new List<Person>{
+    new Person{ Name = "Samuel",DOB = DateTime.Parse("2000-07-02"),PersonGender = Gender.Male},
+    new Person{ Name = "Samuel",DOB = Convert.ToDateTime("2001-08-02"),PersonGender = Gender.Female},
+    new Person{ Name = "Samuel",DOB = Convert.ToDateTime("2007-10-02"),PersonGender = Gender.Others}
+    };
 }
 
 <!DOCTYPE html>
@@ -20,34 +18,17 @@
 
 <body>
     <h2>Welcome</h2>
-    <p>Halo! @person.Name</p>
-    
-    @* Code Block for if *@
-    @if (person.DOB.HasValue)
+    @* <p>Halo! @person.Name</p> *@
+
+    @foreach (Person person in people)
     {
-        double age = Math.Round((DateTime.Now - person.DOB.Value).TotalDays / 365.25);
-        <p>You are @age years old</p>
-    }
-    else
-    {
-        <p>DOB is not supplied.</p>
-    }
-
-    @* Code block for Switch *@
-
-    @switch (person.PersonGender)
-    {
-        case Gender.Male:
-            <p>November 19 is the International Men's Day</p>
-            break;
-
-        case Gender.Female:
-            <p>March 8 is the international Women's Day </p>
-            break;
-
-        case Gender.Others:
-            <p>March 31 is the International Transgender Day </p>
-            break;
+        <p>Name: @person.Name</p>
+        <p>Gender: @person.PersonGender</p>
+        if (person.DOB is not null)
+        {
+            <p>Date of Birth: @person.DOB.Value.ToString("yyyy-MM-dd")</p>
+        }
+        <br />
     }
 </body>
 </html>
