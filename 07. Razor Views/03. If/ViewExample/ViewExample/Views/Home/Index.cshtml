@@ -5,7 +5,8 @@
     Person person = new Person()
             {
                 Name = "Samuel",
-                DOB = Convert.ToDateTime("2000-07-02")
+                // DOB = Convert.ToDateTime("2000-07-02")
+                DOB = null
             };
 }
 
@@ -19,11 +20,14 @@
 <body>
     <h2>Welcome</h2>
     <p>Halo! @person.Name</p>
-    @{
-        double age = Math.Round((DateTime.Now - person.DOB).TotalDays / 365.25);
+    @if (person.DOB.HasValue)
+    {
+        double age = Math.Round((DateTime.Now - person.DOB.Value).TotalDays / 365.25);
+        <p>You are @age years old</p>
     }
-    <p>
-        You are @age years old.
-    </p>
+    else
+    {
+        <p>DOB is not supplied.</p>
+    }
 </body>
 </html>
