@@ -6,7 +6,8 @@
             {
                 Name = "Samuel",
                 // DOB = Convert.ToDateTime("2000-07-02")
-                DOB = null
+                DOB = null,
+                PersonGender = Gender.Male
             };
 }
 
@@ -20,6 +21,8 @@
 <body>
     <h2>Welcome</h2>
     <p>Halo! @person.Name</p>
+    
+    @* Code Block for if *@
     @if (person.DOB.HasValue)
     {
         double age = Math.Round((DateTime.Now - person.DOB.Value).TotalDays / 365.25);
@@ -28,6 +31,23 @@
     else
     {
         <p>DOB is not supplied.</p>
+    }
+
+    @* Code block for Switch *@
+
+    @switch (person.PersonGender)
+    {
+        case Gender.Male:
+            <p>November 19 is the International Men's Day</p>
+            break;
+
+        case Gender.Female:
+            <p>March 8 is the international Women's Day </p>
+            break;
+
+        case Gender.Others:
+            <p>March 31 is the International Transgender Day </p>
+            break;
     }
 </body>
 </html>
