@@ -1,45 +1,57 @@
 ﻿@using ViewExample.Models
 
 @{
-    string titleName = "AspNet Core C# blocks and Expressions";
-    List<Person> people = new List<Person>{
-    new Person{ Name = "Samuel",DOB = DateTime.Parse("2000-07-02"),PersonGender = Gender.Male},
-    new Person{ Name = "Samuel",DOB = Convert.ToDateTime("2001-08-02"),PersonGender = Gender.Female},
-    new Person{ Name = "Samuel",DOB = Convert.ToDateTime("2007-10-02"),PersonGender = Gender.Others}
-    };
-}
-
-
-@{
     double GetAge(DateTime DOB)
     {
         var age = Math.Round((DateTime.Now - DOB).TotalDays / 365.25);
         return age;
     }
-    string totalPeople = $"<script>alert('{people.Count} people are present')</script>";
+    List<Person>? people = (List<Person>?)ViewData["people"];
+    string totalPeople = $"<script>alert('{people!.Count} people are present')</script>";
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@titleName</title>
+    <title>@ViewData["title"]</title> @* direct use of ViewData[] *@
     <meta charset="utf-8" />
+    <link href="~/StyleSheet.css" rel="stylesheet" />
 </head>
 
 <body>
     <h2>Welcome</h2>
     @Html.Raw(totalPeople)
     @* Code block for for *@
-    @foreach(Person person in people)
+    @foreach (Person person in people)
     {
-        <p>Name: @person.Name</p>
-        <p>Gender: @person.PersonGender</p>
+        <div class="box float-left w-50">
+            <h3>@person.Name</h3>
+        </div>
+        <table class="table w-100">
+            <tr>
+                <td>Gender</td>
+                <td>@person.PersonGender</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                @if (@person.DOB is not null)
+                {
+                    <td>@person.DOB.Value.ToString("yyyy-MM-dd")</td> // removing the warning sign by putting the person.DOB in null checker
+                }
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>@GetAge(person.DOB.Value)</td> @* calculatingAge *@
+            </tr>
+        </table>
+        @* <p>Name: @person.Name</p>
+    <p>Gender: @person.PersonGender</p>
 
-        if (person.DOB is not null)
-        {
-            <p>Age: @GetAge(person.DOB.Value) years old</p>
-        }
-        <br />
+    if (person.DOB is not null)
+    {
+    <p>Age: @GetAge(person.DOB.Value) years old</p>
+    }
+    <br /> *@
     }
 </body>
 </html>
