@@ -1,0 +1,59 @@
+﻿@using ViewExample.Models
+
+@{
+    double GetAge(DateTime DOB)
+    {
+        var age = Math.Round((DateTime.Now - DOB).TotalDays / 365.25);
+        return age;
+    }
+    // List<Person>? people = (List<Person>?)ViewData["people"];
+    // ViewBag.People = people;
+    string totalPeople = $"<script>alert('{ViewBag.People.Count} people are present')</script>"; // here i've used ViewBag.People to count
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["title"]</title> @* direct use of ViewData[] *@
+    <meta charset="utf-8" />
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h2>Welcome</h2>
+    @Html.Raw(totalPeople)
+    @* Code block for for *@
+    @foreach (Person person in ViewBag.People)
+    {
+        <div class="box float-left w-50">
+            <h3>@person.Name</h3>
+        </div>
+        <table class="table w-100">
+            <tr>
+                <td>Gender</td>
+                <td>@person.PersonGender</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                @if (@person.DOB is not null)
+                {
+                    <td>@person.DOB.Value.ToString("MM-dd-yyyy")</td> // removing the warning sign by putting the person.DOB in null checker
+                }
+
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>@GetAge(person.DOB.Value) years young</td> @* calculatingAge *@
+            </tr>
+        </table>
+        @* <p>Name: @person.Name</p>
+    <p>Gender: @person.PersonGender</p>
+
+    if (person.DOB is not null)
+    {
+    <p>Age: @GetAge(person.DOB.Value) years old</p>
+    }
+    <br /> *@
+    }
+</body>
+</html>
