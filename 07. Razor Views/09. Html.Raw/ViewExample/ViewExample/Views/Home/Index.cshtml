@@ -10,12 +10,13 @@
 }
 
 
-@functions{
+@{
     double GetAge(DateTime DOB)
     {
         var age = Math.Round((DateTime.Now - DOB).TotalDays / 365.25);
         return age;
     }
+    string totalPeople = $"<script>alert('{people.Count} people are present')</script>";
 }
 
 <!DOCTYPE html>
@@ -27,29 +28,10 @@
 
 <body>
     <h2>Welcome</h2>
-    @* <p>Halo! @person.Name</p> *@
-
-    @* Code block for Foreach *@
-    @*   @foreach (Person person in people)
-    {
-    <p>Name: @person.Name</p>
-    <p>Gender: @person.PersonGender</p>
-    if (person.DOB is not null)
-    {
-    <p>Date of Birth: @person.DOB.Value.ToString("yyyy-MM-dd")</p>
-    }
-    <br />
-    } *@
-
+    @Html.Raw(totalPeople)
     @* Code block for for *@
-    @for (int i = 0; i < 2; i++)
+    @foreach(Person person in people)
     {
-        <text>
-            Hi there, Yaweh ! Rapha ! Elohim ! Edonai ! Elshadai
-        </text>
-        @: God is the only
-
-        Person person = people[0];
         <p>Name: @person.Name</p>
         <p>Gender: @person.PersonGender</p>
 
