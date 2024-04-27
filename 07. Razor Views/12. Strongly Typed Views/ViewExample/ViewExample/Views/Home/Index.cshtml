@@ -1,15 +1,6 @@
 ﻿@using ViewExample.Models
+@model List<Person>
 
-@{
-    double GetAge(DateTime DOB)
-    {
-        var age = Math.Round((DateTime.Now - DOB).TotalDays / 365.25);
-        return age;
-    }
-     // List<Person>? people = (List<Person>?)ViewData["people"];
-    // ViewBag.People = people;
-    string totalPeople = $"<script>alert('{ViewBag.People.Count} people are present')</script>"; // here i've used ViewBag.People to count
-}
 
 <!DOCTYPE html>
 <html>
@@ -21,9 +12,8 @@
 
 <body>
     <h2>Welcome</h2>
-    @Html.Raw(totalPeople)
     @* Code block for for *@
-    @foreach (Person person in ViewBag.People)
+    @foreach (Person person in Model)
     {
         <div class="box float-left w-50">
             <h3>@person.Name</h3>
@@ -41,10 +31,7 @@
                 }
 
             </tr>
-            <tr>
-                <td>Age</td>
-                <td>@GetAge(person.DOB.Value) years young</td> @* calculatingAge *@
-            </tr>
+            <a href="person-details/@person.Name?name=@person.Name">Person Details</a>
         </table>
         @* <p>Name: @person.Name</p>
     <p>Gender: @person.PersonGender</p>
