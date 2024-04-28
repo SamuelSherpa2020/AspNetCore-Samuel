@@ -37,5 +37,19 @@ namespace ViewExample.Controllers
             Person? personDetail = people.Where(tempName => tempName.Name == personName).FirstOrDefault();
             return View(personDetail);
         }
+
+        [Route("person-with-product")]
+        public IActionResult PersonWithProduct()
+        {
+            Person person = new Person(){Name = "Sarah",DOB = DateTime.Parse("2000-07-02"),PersonGender = Gender.Male};
+
+            Product product = new Product() { ProductId=1,ProductName="Television"};
+            PersonAndProductWrapperModel PAPWM = new PersonAndProductWrapperModel()
+            {
+                PersonData = person,
+                ProductData = product, 
+            };
+            return View(PAPWM);
+        }
     }
 }
