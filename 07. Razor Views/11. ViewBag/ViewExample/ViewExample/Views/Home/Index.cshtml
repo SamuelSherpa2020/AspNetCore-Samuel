@@ -21,6 +21,9 @@
 
 <body>
     <h2>Welcome</h2>
+    <p> below i am using ViewData properties </p>
+    <h1>@ViewData.Count</h1>
+    <h1>@ViewData.ContainsKey("people")</h1>
     @Html.Raw(totalPeople)
     @* Code block for for *@
     @foreach (Person person in ViewBag.People)
@@ -43,7 +46,7 @@
             </tr>
             <tr>
                 <td>Age</td>
-                <td>@GetAge(person.DOB.Value) years young</td> @* calculatingAge *@
+                <td>@GetAge(person.DOB!.Value) years young</td> @* calculatingAge *@
             </tr>
         </table>
         @* <p>Name: @person.Name</p>
