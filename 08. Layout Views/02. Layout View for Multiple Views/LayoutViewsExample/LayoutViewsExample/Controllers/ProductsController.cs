@@ -2,7 +2,7 @@
 
 namespace LayoutViewsExample.Controllers
 {
-    public class Products : Controller
+    public class ProductsController : Controller
     {
         [Route("products")]
         public IActionResult Index()
