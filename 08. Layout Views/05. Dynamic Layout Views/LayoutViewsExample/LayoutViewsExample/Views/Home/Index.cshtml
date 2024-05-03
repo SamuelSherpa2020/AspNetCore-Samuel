@@ -3,4 +3,11 @@
 }
 
 <h1>Home</h1>
-<p>Welcome to My HomePage</p>
+@if (ViewData["Hello"] != null)
+{
+    <p>Welcome to My HomePage</p>
+}
+else
+{
+    <p>Seems the ViewData is empty</p>
+}

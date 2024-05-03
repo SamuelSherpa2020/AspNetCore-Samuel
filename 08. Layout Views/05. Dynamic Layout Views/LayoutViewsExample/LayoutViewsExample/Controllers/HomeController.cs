@@ -7,6 +7,7 @@ namespace LayoutViewsExample.Controllers
         [Route("/")]
         public IActionResult Index()
         {
+            //ViewData["Hello"] = "hello";
             return View(); 
         }
 
