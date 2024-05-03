@@ -23,5 +23,11 @@
     <div class="page-content">
         @RenderBody()
     </div>
+    <div class="footer-content">
+        @RenderSection("order_section",false)
+    </div>
+    <div class="footer-content">
+        @RenderSection("FooterForSearch", false)
+    </div>
 </body>
 </html>
