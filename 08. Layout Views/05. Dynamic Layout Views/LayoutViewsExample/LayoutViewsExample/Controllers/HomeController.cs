@@ -7,7 +7,7 @@ namespace LayoutViewsExample.Controllers
         [Route("/")]
         public IActionResult Index()
         {
-            return View();
+            return View(); 
         }
 
         [Route("about-company")]
