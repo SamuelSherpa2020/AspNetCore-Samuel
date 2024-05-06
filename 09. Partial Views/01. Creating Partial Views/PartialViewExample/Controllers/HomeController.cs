@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PartialViewExample
+namespace PartialViewExample.Controllers
 {
     public class HomeController : Controller
     {
@@ -10,7 +10,7 @@ namespace PartialViewExample
             return View();
         }
 
-        [Route("/about/")]
+        [Route("/about")]
         public IActionResult About()
         {
             return View();
