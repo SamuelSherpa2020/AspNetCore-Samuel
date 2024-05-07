@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<h2>Home</h2>
+
+@{
+    PersonGridModel personGridModel = new PersonGridModel()
+            {
+                GridTitle = "Samuel - Hobbies",
+                Persons = new List<Person>()
+        {
+            new Person(){Name="Futsal", JobTitle="I love to play futsal, since it's very competetive and intense"},
+            new Person(){Name="Youtube - informative", JobTitle="I spend almost 3.5 hours on avg on mobile screen but all of it is youtube"},
+            new Person(){Name="Singing", JobTitle="I do love playing guitar and singing, mostly christian songs"},
+            new Person(){Name="Coding", JobTitle="I love coding and learning"}
+        }
+            };
+}
+
+@await Component.InvokeAsync("Grid", personGridModel)
+
+
+<h2>For Employee Description</h2>
+
+@{
+    PersonGridModel personGridModel2 = new PersonGridModel()
+            {
+                GridTitle = "Employees",
+                Persons = new List<Person>()
+    {
+        new Person() { Name = "Mia", JobTitle = "Developer" },
+        new Person() { Name = "Emma", JobTitle = "UI Designer" },
+        new Person() { Name = "Avva", JobTitle = "QA" }
+    }
+            };
+}
+
+@await Component.InvokeAsync("Grid", personGridModel2)
