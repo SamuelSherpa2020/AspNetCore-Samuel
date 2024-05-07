@@ -11,7 +11,8 @@
         </thead>
         <tbody>
 
-            @* @foreach (Person person in ((PersonGridModel)ViewData["EmployeesDescription"]).Persons) *@
+            @* @foreach (Person person in ((PersonGridModel)ViewData["EmployeesDescription"]).Persons) *@ 
+            @* above line of code could also have been used by typecasting ViewData *@
             @foreach (Person person in ViewBag.EmployeesDescription.Persons)
             {
                 <tr>
