@@ -1,0 +1,25 @@
+﻿@using ViewComponentsExample.Models
+<div class="box">
+    <h3>@ViewBag.EmployeesDescription.GridTitle</h3>
+    
+    <table class="table w-100">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Job Title</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @* @foreach (Person person in ((PersonGridModel)ViewData["EmployeesDescription"]).Persons) *@
+            @foreach (Person person in ViewBag.EmployeesDescription.Persons)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.JobTitle</td>
+                </tr>
+            }
+        
+        </tbody>
+    </table>
+</div>
