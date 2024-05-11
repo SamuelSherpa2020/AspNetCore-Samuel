@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Mvc.Formatters;
+using ServiceContractor;
+using Services;
+
 namespace DIExample
 {
     public class Program
@@ -6,6 +10,7 @@ namespace DIExample
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
+            builder.Services.Add(new ServiceDescriptor(typeof(ICitiesServices), typeof(CitiesServices),ServiceLifetime.Transient));
 
             var app = builder.Build();
 

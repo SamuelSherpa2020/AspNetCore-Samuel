@@ -1,6 +1,7 @@
-﻿namespace Services
+﻿using ServiceContractor;
+namespace Services
 {
-    public class CitiesServices
+    public class CitiesServices : ICitiesServices
     {
         public List<string> _ctities;
         public CitiesServices()

@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServiceContractor;
 using Services;
 
 namespace DIExample.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly CitiesServices _cities;
-        public HomeController()
+        private readonly ICitiesServices _icitiesServices;
+        public HomeController(ICitiesServices icitiesServices)
         {
-            _cities = new CitiesServices();
+            _icitiesServices = icitiesServices;
         }
 
         [Route("/")]
         public IActionResult Index()
         {
-            List<string> cities = _cities.GetCities();
+            List<string> cities = _icitiesServices.GetCities();
             return View(cities);
         }
     }
