@@ -1,0 +1,46 @@
+﻿@using ViewExample.Models
+@model List<Person>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["title"]</title> @* direct use of ViewData[] *@
+    <meta charset="utf-8" />
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h2>Welcome</h2>
+    @* Code block for for *@
+    @foreach (Person person in Model)
+    {
+        <div class="box float-left w-50">
+            <h3>@person.Name</h3>
+        </div>
+        <table class="table w-100">
+            <tr>
+                <td>Gender</td>
+                <td>@person.PersonGender</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                @if (@person.DOB is not null)
+                {
+                    <td>@person.DOB.Value.ToString("MM-dd-yyyy")</td> // removing the warning sign by putting the person.DOB in null checker
+                }
+
+            </tr>
+            <a href="person-details/@person.Name?name=@person.Name">Person Details</a>
+        </table>
+        @* <p>Name: @person.Name</p>
+    <p>Gender: @person.PersonGender</p>
+
+    if (person.DOB is not null)
+    {
+    <p>Age: @GetAge(person.DOB.Value) years old</p>
+    }
+    <br /> *@
+    }
+</body>
+</html>

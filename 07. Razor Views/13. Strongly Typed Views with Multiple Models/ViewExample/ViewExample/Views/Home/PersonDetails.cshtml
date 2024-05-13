@@ -1,0 +1,31 @@
+﻿@using ViewExample.Models
+@model Person
+
+<!DOCTYPE html>
+    <head>
+        <title>PersonDetail</title>
+        <meta charset="utf-8" />
+        <link href="~/StyleSheet.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="page-content">
+            <h1>Person Details</h1>
+            <div class="box">
+                <h3>@Model.Name</h3>
+                <table class="table w-100">
+                    <tbody>
+                        <tr>
+                            <td>Gender</td>
+                            <td>@Model.PersonGender</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td>@Model.DOB?.ToString("MM-dd-yyyy")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="/home">Back To Persons</a>
+        </div>
+    </body>
+</html>

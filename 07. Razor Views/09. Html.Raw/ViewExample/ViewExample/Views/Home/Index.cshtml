@@ -1,0 +1,45 @@
+﻿@using ViewExample.Models
+
+@{
+    string titleName = "AspNet Core C# blocks and Expressions";
+    List<Person> people = new List<Person>{
+    new Person{ Name = "Samuel",DOB = DateTime.Parse("2000-07-02"),PersonGender = Gender.Male},
+    new Person{ Name = "Samuel",DOB = Convert.ToDateTime("2001-08-02"),PersonGender = Gender.Female},
+    new Person{ Name = "Samuel",DOB = Convert.ToDateTime("2007-10-02"),PersonGender = Gender.Others}
+    };
+}
+
+
+@{
+    double GetAge(DateTime DOB)
+    {
+        var age = Math.Round((DateTime.Now - DOB).TotalDays / 365.25);
+        return age;
+    }
+    string totalPeople = $"<script>alert('{people.Count} people are present')</script>";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@titleName</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <h2>Welcome</h2>
+    @Html.Raw(totalPeople)
+    @* Code block for for *@
+    @foreach(Person person in people)
+    {
+        <p>Name: @person.Name</p>
+        <p>Gender: @person.PersonGender</p>
+
+        if (person.DOB is not null)
+        {
+            <p>Age: @GetAge(person.DOB.Value) years old</p>
+        }
+        <br />
+    }
+</body>
+</html>
