@@ -10,7 +10,8 @@ namespace DIExample
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
-            builder.Services.Add(new ServiceDescriptor(typeof(ICitiesServices), typeof(CitiesServices),ServiceLifetime.Transient));
+            builder.Services.Add(new ServiceDescriptor(typeof(ICitiesServices), typeof(CitiesServices),ServiceLifetime.Singleton));
+
 
             var app = builder.Build();
 

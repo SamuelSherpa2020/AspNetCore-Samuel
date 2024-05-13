@@ -2,6 +2,7 @@
 {
     public interface ICitiesServices
     {
-        public List<string> GetCities();
+        Guid ICitiesServiceId { get; }
+         List<string> GetCities();
     }
 }

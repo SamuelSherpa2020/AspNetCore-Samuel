@@ -6,9 +6,16 @@
 
 <h1>Cities</h1>
 
-    <ul class="list">
-    @foreach(string city in Model)
+<ul class="list">
+    @foreach (string city in Model)
     {
         <li>@city</li>
     }
 </ul>
+<div class="box">
+    @ViewBag._icitiesServices1
+    <br />
+    @ViewBag._icitiesServices2
+    <br />
+    @ViewBag._icitiesServices3
+</div>

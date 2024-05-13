@@ -3,9 +3,20 @@ namespace Services
 {
     public class CitiesServices : ICitiesServices
     {
-        public List<string> _ctities;
+        private List<string> _ctities;
+
+        private Guid _citiesServiceId;
+
+        public Guid ICitiesServiceId
+        {
+            get
+            {
+                return _citiesServiceId;
+            }
+        }
         public CitiesServices()
         {
+            _citiesServiceId = Guid.NewGuid();
             _ctities = new List<string>()
             {
                 "Damak",
