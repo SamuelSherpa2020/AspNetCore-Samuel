@@ -31,7 +31,7 @@
         @* Email *@
         <div class="form-field flex">
             <div class="w-25">
-                <label asp-for="Email" class="form-label pt">Name</label>
+                <label asp-for="Email" class="form-label pt">Email</label>
             </div>
             <div class="flex-1">
                 <input asp-for="Email" class="form-input" />
@@ -42,7 +42,7 @@
         @* PhoneNumber *@
         <div class="form-field flex">
             <div class="w-25">
-                <label asp-for="Phone" class="form-label pt">Name</label>
+                <label asp-for="Phone" class="form-label pt">Phone No</label>
             </div>
             <div class="flex-1">
                 <input asp-for="Phone" class="form-input" />
@@ -53,7 +53,7 @@
         @* Password *@
         <div class="form-field flex">
             <div class="w-25">
-                <label asp-for="Password" class="form-label pt">Name</label>
+                <label asp-for="Password" class="form-label pt">Password</label>
             </div>
             <div class="flex-1">
                 <input asp-for="Password" class="form-input" />
@@ -64,7 +64,7 @@
         @* ConfirmPassword *@
         <div class="form-field flex">
             <div class="w-25">
-                <label asp-for="ConfirmPassword" class="form-label pt">Name</label>
+                <label asp-for="ConfirmPassword" class="form-label pt">Confirm Password</label>
             </div>
             <div class="flex-1">
                 <input asp-for="ConfirmPassword" class="form-input" />
@@ -95,3 +95,12 @@
         </div>
     </form>
 </div>
+
+@section scripts
+            {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-fallback-test="window.jQuery" asp-fallback-src="~/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" asp-fallback-test="window.jQuery.validator" asp-fallback-src="~/jquery.validate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" asp-fallback-test="window.jQuery.validator.unobstrusive" asp-fallback-src="~/jquery.validate.unobtrusive.min.js"></script>
+}
