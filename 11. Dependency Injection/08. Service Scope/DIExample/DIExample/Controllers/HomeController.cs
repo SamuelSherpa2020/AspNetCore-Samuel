@@ -31,6 +31,8 @@ namespace DIExample.Controllers
             using (IServiceScope scope = _scopeFactory.CreateScope())
             {
                 ICitiesServices _iCitiesService = scope.ServiceProvider.GetRequiredService<ICitiesServices>();
+                IServiceScope scope2 = scope.ServiceProvider.CreateScope();
+                IServiceScope scope3 = scope2.ServiceProvider.CreateScope();
                 ViewBag.ICitiesServiceChildScope = _iCitiesService.ICitiesServiceId;
             }
 
