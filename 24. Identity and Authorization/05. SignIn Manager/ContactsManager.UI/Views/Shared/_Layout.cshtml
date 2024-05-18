@@ -27,6 +27,7 @@
       <div class="navbar account-links">
 
        <ul>
+           <li>@User.Identity?.Name</li>
         <li>
          <a asp-controller="Account" asp-action="Register">Register</a>
          <a asp-controller="Account" asp-action="Login">Login</a>
