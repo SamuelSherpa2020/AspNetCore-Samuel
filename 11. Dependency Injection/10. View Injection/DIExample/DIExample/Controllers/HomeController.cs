@@ -22,18 +22,29 @@ namespace DIExample.Controllers
         [Route("/")]
         public IActionResult Index()
         {
-            List<string> cities = _icitiesServices1.GetCities();
+            //List<string> cities = _icitiesServices1.GetCities();
 
+            //ViewBag._icitiesServices1 = _icitiesServices1.ICitiesServiceId;
+            //ViewBag._icitiesServices2 = _icitiesServices2.ICitiesServiceId;
+            //ViewBag._icitiesServices3 = _icitiesServices3.ICitiesServiceId;
+
+            //using (IServiceScope scope = _scopeFactory.CreateScope())
+            //{
+            //    ICitiesServices _iCitiesService = scope.ServiceProvider.GetRequiredService<ICitiesServices>();
+            //    ViewBag.ICitiesServiceChildScope = _iCitiesService.ICitiesServiceId;
+            //}
+
+            //return View(cities);
+            List<string> cities = _icitiesServices1.GetCities();
             ViewBag._icitiesServices1 = _icitiesServices1.ICitiesServiceId;
             ViewBag._icitiesServices2 = _icitiesServices2.ICitiesServiceId;
             ViewBag._icitiesServices3 = _icitiesServices3.ICitiesServiceId;
 
             using (IServiceScope scope = _scopeFactory.CreateScope())
-            {
-                ICitiesServices _iCitiesService = scope.ServiceProvider.GetRequiredService<ICitiesServices>();
-                ViewBag.ICitiesServiceChildScope = _iCitiesService.ICitiesServiceId;
+            { 
+                ICitiesServices _icitiesServiceChild  = scope.ServiceProvider.GetRequiredService<ICitiesServices>();
+                ViewBag.ICitiesServiceChildScope = _icitiesServiceChild.ICitiesServiceId;
             }
-
             return View(cities);
         }
     }
